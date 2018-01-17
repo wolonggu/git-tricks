@@ -42,7 +42,7 @@ branches.each do | branch |
   author = log.split("\n")[1]
   if author.include? "#{ARGV[1]}"
     puts "Delete #{commit} #{author} #{branch}"
-    f.write("git push --delete origin #{branch.sub(/origin\//, '')}")
+    f.write("git push --delete origin #{branch.sub(/origin\//, '')}\n")
   end
 end
 
