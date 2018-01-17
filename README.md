@@ -21,3 +21,9 @@ git branch -r --merged | grep -v master | sed 's/origin\///' | xargs -n 1 git pu
 ```
 git log --format='%ae' COMMIT_ID
 ```
+
+or 
+
+```
+git show 1918e863e8f3d0f5f4e87c864555a27ba9c73f59 --stat | grep Author
+```
