@@ -15,3 +15,9 @@ In more recent versions of Git
 ```
 git branch -r --merged | grep -v master | sed 's/origin\///' | xargs -n 1 git push --delete origin
 ```
+
+# show authors of commit
+
+```
+git log --format='%ae' COMMIT_ID
+```
