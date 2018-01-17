@@ -27,3 +27,18 @@ or
 ```
 git show 1918e863e8f3d0f5f4e87c864555a27ba9c73f59 --stat | grep Author
 ```
+
+# delete branches merged
+```ruby
+branches = `git branch -r --merged | grep -v master`
+branches = branches.split("\n")
+branches.each do | branch |
+  commit = `git rev-parse #{branch}`
+  log = `git show --stat #{commit}`
+  author = log.split("\n")[1]
+  if author.include? "#{ARGV[0]}"
+    puts "Delete #{commit} #{author} #{branch}"
+    puts "git push --delete origin #{branch.sub(/origin\//, '')}"
+  end
+end
+```
