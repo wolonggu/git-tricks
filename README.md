@@ -30,15 +30,22 @@ git show 1918e863e8f3d0f5f4e87c864555a27ba9c73f59 --stat | grep Author
 
 # delete branches merged
 ```ruby
+puts "#{ARGV[0]} #{ARGV[1]}"
+
+f = File.open("#{ARGV[0]}", 'a')
+
 branches = `git branch -r --merged | grep -v master`
 branches = branches.split("\n")
 branches.each do | branch |
   commit = `git rev-parse #{branch}`
   log = `git show --stat #{commit}`
   author = log.split("\n")[1]
-  if author.include? "#{ARGV[0]}"
+  if author.include? "#{ARGV[1]}"
     puts "Delete #{commit} #{author} #{branch}"
-    puts "git push --delete origin #{branch.sub(/origin\//, '')}"
+    f.write("git push --delete origin #{branch.sub(/origin\//, '')}")
   end
 end
+
+f.close
+
 ```
